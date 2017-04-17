@@ -1,0 +1,66 @@
+package com.radauer;
+
+import java.io.Serializable;
+
+/**
+ * Created by Andreas on 17.04.2017.
+ */
+public class QuizSession  implements Serializable{
+
+    private String user;
+    private String email;
+    private long quizStart;
+    private int currentQuestion;
+    private int points;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public long getQuizStart() {
+        return quizStart;
+    }
+
+    public void setQuizStart(long quizStart) {
+        this.quizStart = quizStart;
+    }
+
+    public int getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public void setCurrentQuestion(int currentQuestion) {
+        this.currentQuestion = currentQuestion;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    @Override
+    public String toString() {
+        return "QuizSession{" +
+                "user='" + user + '\'' +
+                ", email='" + email + '\'' +
+                ", quizStart=" + quizStart +
+                ", currentQuestion=" + currentQuestion +
+                ", points=" + points +
+                '}';
+    }
+}
