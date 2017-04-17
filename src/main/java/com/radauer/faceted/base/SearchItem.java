@@ -1,4 +1,4 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 /**
  * Created by Andreas on 17.04.2017.

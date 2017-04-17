@@ -1,4 +1,4 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 import org.apache.commons.lang.ArrayUtils;
 
@@ -11,41 +11,43 @@ import java.util.*;
 /**
  * Created by Andreas on 16.04.2017.
  */
-public class SearchService {
+public class SearchService<TYPE> {
 
-    private List<Document> documents;
+    private List<Document<TYPE>> documents;
     private String[] facets;
+    private Class<TYPE> clazz;
 
-    public void index(List<Car> cars, String[] facets) throws Exception {
+    public void index(List<TYPE> subjects, String[] facets, Class<TYPE> clazz) throws Exception {
         this.facets = facets;
+        this.clazz = clazz;
         documents = new ArrayList<>();
 
 
         Map<String, Method> methodMap = createMethodMap(facets);
 
 
-        for (Car car : cars) {
-            documents.add(indexCar(car, methodMap));
+        for (TYPE subject : subjects) {
+            documents.add(indexSubject(subject, methodMap));
         }
     }
 
-    private Document indexCar(Car car, Map<String, Method> methodMap) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+    private Document indexSubject(TYPE subject, Map<String, Method> methodMap) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
 
         Map<String, String[]> facets = new HashMap<>();
         for (String facet : methodMap.keySet()) {
             Method method = methodMap.get(facet);
-            Object value = method.invoke(car);
+            Object value = method.invoke(subject);
             String[] result = value instanceof String[] ? (String[]) value : new String[]{(String) value};
             facets.put(facet, result);
 
         }
-        return new Document(car, facets);
+        return new Document(subject, facets);
     }
 
     private Map<String, Method> createMethodMap(String[] facets) throws IntrospectionException {
         Map<String, Method> methodMap = new HashMap<>();
         for (String facet : facets) {
-            methodMap.put(facet, new PropertyDescriptor(facet, Car.class).getReadMethod());
+            methodMap.put(facet, new PropertyDescriptor(facet, clazz).getReadMethod());
         }
         return methodMap;
 
@@ -55,13 +57,13 @@ public class SearchService {
 
 
         Map<String, SearchCriteria> criterias = new HashMap<>();
-        List<Car> cars = new ArrayList<>();
+        List<TYPE> result = new ArrayList<>();
 
         Map<String, SearchParameter> mappedParameter = mapParameter(parameter);
 
 
         FittingMask fitsFacets = new FittingMask(facets.length);
-        for (Document doc : documents) {
+        for (Document<TYPE> doc : documents) {
             fitsFacets.reset();
 
             for (int i = 0; i < facets.length; i++) {
@@ -69,21 +71,21 @@ public class SearchService {
 
                 String[] valuesForFacet = doc.getFacets().get(facet);
                 SearchParameter searchParameter = mappedParameter.get(facet);
-                if(searchParameter != null){
+                if (searchParameter != null) {
                     boolean fits = doesValuesFitParameter(valuesForFacet, searchParameter.getValues());
                     fitsFacets.setFit(i, fits);
                 }
             }
 
-            if(fitsFacets.fitsAll()){
-                cars.add(doc.getCar());
+            if (fitsFacets.fitsAll()) {
+                result.add(doc.getSubject());
             }
 
 
             for (int i = 0; i < facets.length; i++) {
                 String facet = facets[i];
 
-                if(fitsFacets.fitsAllIgnoreCurrent(i)){
+                if (fitsFacets.fitsAllIgnoreCurrent(i)) {
                     SearchCriteria searchCriteria = getCriteria(facet, criterias);
 
                     String[] valuesForFacet = doc.getFacets().get(facet);
@@ -91,20 +93,15 @@ public class SearchService {
                 }
 
 
-
-
-
             }
-
-
         }
 
-        return new SearchResponse(parameter, new ArrayList<>(criterias.values()), cars);
+        return new SearchResponse(parameter, new ArrayList<>(criterias.values()), result);
     }
 
     private Map<String, SearchParameter> mapParameter(List<SearchParameter> parameter) {
         Map<String, SearchParameter> mapedParameter = new HashMap<>();
-        if(parameter != null){
+        if (parameter != null) {
             for (SearchParameter param : parameter) {
                 if (mapedParameter.containsKey(param.getAttribute())) {
 

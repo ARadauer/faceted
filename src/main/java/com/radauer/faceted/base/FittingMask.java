@@ -1,4 +1,4 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 /**
  * Created by Andreas on 17.04.2017.
@@ -33,7 +33,7 @@ public class FittingMask {
     }
 
     public boolean fitsAllIgnoreCurrent(int current) {
-        for(int i =0; i < values.length ; i++){
+        for (int i = 0; i < values.length; i++) {
             if (!values[i] && i != current) {
                 return false;
             }

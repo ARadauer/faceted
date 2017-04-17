@@ -1,5 +1,9 @@
 package com.radauer.faceted;
 
+import com.radauer.faceted.base.SearchParameter;
+import com.radauer.faceted.base.SearchResponse;
+import com.radauer.faceted.base.SearchService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +32,11 @@ public class Test {
 
         System.out.println("Car " + cars.size());
 
-
         String[] facets = {"brand", "fuel", "geartype", "chassyTypes"};
 
         SearchService searchService = new SearchService();
 
-        searchService.index(cars, facets);
+        searchService.index(cars, facets, Car.class);
 
 
         long t = System.currentTimeMillis();

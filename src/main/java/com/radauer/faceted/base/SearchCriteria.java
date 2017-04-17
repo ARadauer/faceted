@@ -1,4 +1,4 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 import java.util.Map;
 

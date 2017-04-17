@@ -1,16 +1,16 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 import java.util.List;
 
 /**
  * Created by Andreas on 16.04.2017.
  */
-public class SearchResponse {
+public class SearchResponse <TYPE> {
     List<SearchParameter> searchParameter;
     List<SearchCriteria> searchCriterias;
-    List<Car> result;
+    List<TYPE> result;
 
-    public SearchResponse(List<SearchParameter> searchParameter, List<SearchCriteria> searchCriterias, List<Car> result) {
+    public SearchResponse(List<SearchParameter> searchParameter, List<SearchCriteria> searchCriterias, List<TYPE> result) {
         this.searchParameter = searchParameter;
         this.searchCriterias = searchCriterias;
         this.result = result;
@@ -32,11 +32,11 @@ public class SearchResponse {
         this.searchCriterias = searchCriterias;
     }
 
-    public List<Car> getResult() {
+    public List<TYPE> getResult() {
         return result;
     }
 
-    public void setResult(List<Car> result) {
+    public void setResult(List<TYPE> result) {
         this.result = result;
     }
 
@@ -45,7 +45,7 @@ public class SearchResponse {
         return "SearchResponse{" +
                 "\nsearchParameter=" + searchParameter +
                 ",\nsearchCriterias=" + searchCriterias +
-                ",\n cars=" + result.size() +
+                ",\n subjects=" + result.size() +
                 '}';
     }
 }

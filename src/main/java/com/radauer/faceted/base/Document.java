@@ -1,25 +1,25 @@
-package com.radauer.faceted;
+package com.radauer.faceted.base;
 
 import java.util.Map;
 
 /**
  * Created by Andreas on 17.04.2017.
  */
-public class Document {
-    private Car car;
+public class Document <TYPE> {
+    private TYPE subject;
     private Map<String, String[]> facets;
 
-    public Document(Car car, Map<String, String[]> facets) {
-        this.car = car;
+    public Document(TYPE car, Map<String, String[]> facets) {
+        this.subject = car;
         this.facets = facets;
     }
 
-    public Car getCar() {
-        return car;
+    public TYPE getSubject() {
+        return subject;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setSubject(TYPE subject) {
+        this.subject = subject;
     }
 
     public Map<String, String[]> getFacets() {
