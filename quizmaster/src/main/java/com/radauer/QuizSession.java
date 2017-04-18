@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Created by Andreas on 17.04.2017.
  */
-public class QuizSession  implements Serializable{
+public class QuizSession implements Serializable
+{
 
     private String user;
     private String email;
@@ -13,54 +14,72 @@ public class QuizSession  implements Serializable{
     private int currentQuestion;
     private int points;
 
-    public String getUser() {
+    public String getUser()
+    {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(String user)
+    {
         this.user = user;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 
-    public long getQuizStart() {
+    public long getQuizStart()
+    {
         return quizStart;
     }
 
-    public void setQuizStart(long quizStart) {
+    public void setQuizStart(long quizStart)
+    {
         this.quizStart = quizStart;
     }
 
-    public int getCurrentQuestion() {
+    public int getCurrentQuestion()
+    {
         return currentQuestion;
     }
 
-    public void setCurrentQuestion(int currentQuestion) {
+    public void setCurrentQuestion(int currentQuestion)
+    {
         this.currentQuestion = currentQuestion;
     }
 
-    public int getPoints() {
+    public int getPoints()
+    {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(int points)
+    {
         this.points = points;
     }
 
     @Override
-    public String toString() {
-        return "QuizSession{" +
-                "user='" + user + '\'' +
-                ", email='" + email + '\'' +
-                ", quizStart=" + quizStart +
-                ", currentQuestion=" + currentQuestion +
-                ", points=" + points +
-                '}';
+    public String toString()
+    {
+        return "QuizSession{"
+            + "user='"
+            + user
+            + '\''
+            + ", email='"
+            + email
+            + '\''
+            + ", quizStart="
+            + quizStart
+            + ", currentQuestion="
+            + currentQuestion
+            + ", points="
+            + points
+            + '}';
     }
 }

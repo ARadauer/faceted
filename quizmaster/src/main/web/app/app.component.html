@@ -1,0 +1,34 @@
+<nav class="navbar navbar-toggleable-md navbar-light navbar-fixed-top">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/index">WAD POI Quizmaster</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <span class="navbar-text">
+            <i class="typcn typcn-time"></i>
+            {{currentTime$ | async | date:"HH:mm:ss"}}
+        </span>
+    <span class="navbar-text">
+            <i class="typcn typcn-user"></i>
+            {{user?.firstName}} {{user?.lastName}}
+        </span>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="logout()">logout</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="content">
+        <p>vor:</p>
+      <router-outlet></router-outlet>
+        <p>:nach</p>
+    </div>
+  </div>
+</div>

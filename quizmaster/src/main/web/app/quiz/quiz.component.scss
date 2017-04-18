@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/mixins/_border-radius";
+@import "~bootstrap/scss/mixins/_buttons";
+@import "~bootstrap/scss/_mixins";
+
+@import "~bootstrap/scss/_buttons";
+
+.ng2-smart-action {
+  &.ng2-smart-action-edit-edit {
+    @extend .btn;
+    @extend .btn-secondary;
+    @extend .btn-sm;
+  }
+}
