@@ -10,11 +10,13 @@ public class QuizResult
 
     private String message;
     private boolean finished;
+    private boolean started;
 
     private int currentQuestion;
+    private int numberOfQuestions;
     private String question;
-    private String[] answers;
-    private int timeInSecounds;
+    private Answer[] answers;
+    private int timeInSeconds;
     private int points;
 
     public int getCurrentQuestion()
@@ -37,24 +39,22 @@ public class QuizResult
         this.question = question;
     }
 
-    public String[] getAnswers()
+    public Answer[] getAnswers()
     {
         return answers;
     }
 
-    public void setAnswers(String[] answers)
+    public void setAnswers(Answer[] answers)
     {
         this.answers = answers;
     }
 
-    public int getTimeInSecounds()
-    {
-        return timeInSecounds;
+    public int getTimeInSeconds() {
+        return timeInSeconds;
     }
 
-    public void setTimeInSecounds(int timeInSecounds)
-    {
-        this.timeInSecounds = timeInSecounds;
+    public void setTimeInSeconds(int timeInSeconds) {
+        this.timeInSeconds = timeInSeconds;
     }
 
     public int getPoints()
@@ -95,5 +95,21 @@ public class QuizResult
     public void setFinished(boolean finished)
     {
         this.finished = finished;
+    }
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(int numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 }

@@ -7,17 +7,18 @@ import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {AppComponent} from "./app.component";
 import {AppRoutes} from "./app.routes";
-import {DriverClassComponent} from "./driver-class/driver-class.component";
-import {DriverClassService} from "./driver-class/driver-class.service";
 import {QuizComponent} from "./quiz/quiz.component";
 import {QuizService} from "./quiz/quiz.service";
+import { QuizLoginComponent } from './quiz-login/quiz-login.component';
+import { QuizResultComponent } from './quiz-result/quiz-result.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        DriverClassComponent,
-        QuizComponent
+        QuizComponent,
+        QuizLoginComponent,
+        QuizResultComponent
     ],
     imports: [
         BrowserModule,
@@ -28,7 +29,6 @@ import {QuizService} from "./quiz/quiz.service";
         TabsModule.forRoot()
     ],
     providers: [
-        DriverClassService,
         QuizService
     ],
     bootstrap: [AppComponent]

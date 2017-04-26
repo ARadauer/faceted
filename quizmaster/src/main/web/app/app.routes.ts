@@ -1,20 +1,16 @@
 import {Routes} from "@angular/router";
-import {DriverClassComponent} from "./driver-class/driver-class.component";
 import {QuizComponent} from "./quiz/quiz.component";
+import {QuizResultComponent} from "./quiz-result/quiz-result.component";
 
 export const AppRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
-    pathMatch: 'full'
-  },
-  {
-    path: 'index',
     pathMatch: 'full',
     component: QuizComponent
-  }/*,
+  },
   {
-    path: 'page/driver-class',
-    component: DriverClassComponent
-  }*/
+    path: 'results',
+    pathMatch: 'full',
+    component: QuizResultComponent
+  }
 ];

@@ -1,3 +1,24 @@
-<div class="container-fluid">
-<p>Quiz:</p>
+<div>
+    <h1>{{quizResult.message}}</h1>
+
+    <div *ngIf="!quizResult.started">
+        <app-quiz-login (afterLogin)="handleLogin($event)"></app-quiz-login>
+    </div>
+
+    <div *ngIf="quizResult.started">
+        <div *ngIf="!quizResult.finished">
+            <h2>Question {{quizResult.currentQuestion+1}}/{{quizResult.numberOfQuestions}}: {{quizResult.question}}</h2>
+            <li *ngFor="let answer of quizResult.answers">
+                {{ answer.number }}
+                <button (click)="onGiveAnswer(answer)">{{ answer.answer }}</button>
+            </li>
+        </div>
+
+        <h2>Points: {{quizResult.points}}</h2>
+        <h2>Time: {{quizResult.timeInSeconds}}</h2>
+    </div>
+    <div *ngIf="quizResult.finished">
+        <button (click)="onRestart()">Restart!</button>
+        <app-quiz-result></app-quiz-result>
+    </div>
 </div>

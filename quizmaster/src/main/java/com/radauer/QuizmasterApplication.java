@@ -11,4 +11,6 @@ public class QuizmasterApplication
     {
         SpringApplication.run(QuizmasterApplication.class, args);
     }
+
+
 }

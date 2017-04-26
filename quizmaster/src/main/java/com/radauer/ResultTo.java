@@ -7,10 +7,11 @@ public class ResultTo
 {
     private int num;
     private String name;
+    private String company;
     private int points;
     private int time;
 
-    public ResultTo(int num, String name, int points, int time)
+    public ResultTo(int num, String name, String company, int points, int time)
     {
         this.num = num;
         this.name = name;
@@ -56,5 +57,13 @@ public class ResultTo
     public void setTime(int time)
     {
         this.time = time;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

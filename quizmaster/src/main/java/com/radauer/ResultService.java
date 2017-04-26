@@ -1,57 +1,59 @@
 package com.radauer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Andreas on 17.04.2017.
  */
 @Service
-public class ResultService
-{
-    private List<Result> resultList = new ArrayList<>();
+public class ResultService {
 
-    public List<ResultTo> getResults()
-    {
+    @Autowired
+    private ResultRepository resultRepository;
 
-        List<ResultTo> toList = new ArrayList<>(resultList.size());
-        for (int i = 0; i < resultList.size(); i++)
-        {
-            Result result = resultList.get(i);
-            toList.add(new ResultTo(i + 1, result.getName(), result.getPoints(), result.getTime()));
+    public List<ResultTo> getResults() {
+
+        Iterable<Result> resultList = resultRepository.findAll();
+        List<ResultTo> toList = new ArrayList<>();
+        int count = 0;
+        for (Result result : resultList) {
+            count++;
+
+            toList.add(new ResultTo(count, result.getName(), result.getCompany(), result.getPoints(), result.getTime()));
         }
 
         return toList;
     }
 
-    public int addResult(Result result)
-    {
+    public int addResult(Result result) {
 
-        resultList.add(result);
-        Collections.sort(resultList, new Comparator<Result>()
-        {
-            @Override
-            public int compare(Result o1, Result o2)
-            {
-                if (o1.getPoints() == o2.getPoints())
-                {
-                    return o1.getTime() - o2.getTime();
-                }
-                return o2.getPoints() - o1.getPoints();
-            }
-        });
+        resultRepository.save(result);
+
+        List<Result> resultList = (List<Result>) resultRepository.findAll();
+        sort(resultList);
 
         return resultList.indexOf(result);
     }
 
-    public boolean containsEmail(String email)
-    {
+    private void sort(List<Result> resultList) {
+        Collections.sort(resultList, (o1, o2) -> {
+            if (o1.getPoints() == o2.getPoints()) {
+                return o1.getTime() - o2.getTime();
+            }
+            return o2.getPoints() - o1.getPoints();
+        });
+    }
+
+    public boolean containsEmail(String email) {
         Result result = new Result();
         result.setEmail(email);
-        return resultList.contains(result);
+        //TOOD
+        return false;
     }
 
 }

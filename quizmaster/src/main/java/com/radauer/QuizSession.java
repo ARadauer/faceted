@@ -10,6 +10,7 @@ public class QuizSession implements Serializable
 
     private String user;
     private String email;
+    private String company;
     private long quizStart;
     private int currentQuestion;
     private int points;
@@ -62,6 +63,14 @@ public class QuizSession implements Serializable
     public void setPoints(int points)
     {
         this.points = points;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override
